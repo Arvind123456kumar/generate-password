@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>password generator</title>
+        <style>
+            body{
+                background-color: rgb(105, 103, 102);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+/******************************************************** container  **************************************/
+            #container{
+                margin-top: 200px;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                background-color: rgb(107, 250, 124);
+                width: 500px;
+                aspect-ratio: 2;
+                border-radius: 5px;
+              font-weight: bold; 
+             
+            }
+            #passswordBox{
+                display: flex;
+            }
+/****************************************password show in this box **************************************/
+            #password{
+                padding: 10px 7px;
+                width: 300px;
+                margin-right: 0px;
+                border: none;
+                outline: none;
+                border-radius: 5px;
+border-bottom-right-radius: 0px;
+border-top-right-radius: 0px;
+            }
+/********************************************* copy password button*************************************/
+            #copy{
+                margin-left: 0px;
+                padding: 10px 7px;
+                border: none;
+                outline: none;
+                border-bottom-right-radius: 5px;
+border-top-right-radius: 5px;
+            }
+            #copy:hover{
+                cursor: pointer;
+                background-color: rgb(16, 69, 69);
+                color: rgb(252, 252, 254);
+            }
+/******************************************generate password button*************************************/
+            #generate{
+                padding:10px 7px;
+                font-weight: bold;
+                width: 150px;
+                color: rgb(248, 239, 239);
+                background-color: rgb(80, 79, 81);
+                border: none;
+                outline: none;
+                border-radius: 5px;
+                transition: all 0.5ms ease 0.5s;
+            }
+            #generate:hover{
+                cursor: pointer;
+            background-color: rgb(235, 189, 134);
+            color: black;
+            }
+/* ***************************************show password button************************************/
+            #showPassword{
+                padding:10px 7px;
+                font-weight: bold;
+               display: none;
+                border-radius: 5px;
+                width: 150px;
+
+            }
+            #showPassword:hover{
+               
+                cursor: pointer;
+                background-color: black;
+                color: aliceblue;
+                border-radius: 5px;
+                width: 150px;
+                padding:10px 7px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+<!-- //*********************************** container ************************************** -->
+        <div id="container">
+            <h1>password generator</h1>
+<!-- //******************************** password box ************************************** -->
+            <div id="passswordBox">
+                <input type="password" id="password" placeholder="your password">
+<!-- //******************************* password copy button************************************** -->
+<button id="copy" onclick="copy()">copy</button>
+            </div>
+<!-- //************************************ password show button************************************** -->
+            <div id="showPassword" onclick="showPassword()">show password</div>
+<!-- //******************************* password generate button************************************** -->
+            <button id="generate" onclick="generate()">generate password</button>
+        </div>
+        <!--********************************* script start ********************************************* -->
+        <script> 
+        let showPassword=document.getElementById('showPassword');       
+            const length=12;
+           const upperCase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+           const lowerCase="abcdefghijklmnopqrstuvwxyz";
+           const  number="1234567890";
+           const spacialChar="~!@#$%^&*()_+?/\|><[]{}";
+           const  allChar=upperCase + lowerCase + number + spacialChar;
+           let show=document.getElementById('password');
+//******************************************** password generate function**************************************
+           generate=()=>{
+           let pass="";
+pass+=upperCase[Math.floor(Math.random() * upperCase.length)];
+pass+=lowerCase[Math.floor(Math.random() *lowerCase.length)];
+pass+=number[Math.floor(Math.random() * number.length)];
+pass+=spacialChar[Math.floor(Math.random() * spacialChar.length)];
+while(length>pass.length){
+   pass+=allChar[Math.floor(Math.random() * allChar.length)];     
+}
+show.value=pass;
+//******************************************** show or hide password condition**************************
+
+if(showPassword.style.display='none'){
+    showPassword.style.display='block';  
+}
+else{
+    showPassword.style.display='none';  
+}
+//************************************ show or hide password function*************************************
+showPassword=()=>{
+           if(show.type=='password'){
+            show.type='text';         
+           }
+           else{
+            show.type='password';
+           }
+            }
+// ***********************************copy password function*********************************************
+            copy=()=>{
+show.select();
+document.execCommand("copy");
+show.value=pass+"\t Password copied !"
+setTimeout(()=>{
+show.value=''
+showPassword.style.display='none';  
+            },2000)
+}
+            // *********************************** end copy password function**********************************
+        }
+        </script>
+    </body>
+</html>
